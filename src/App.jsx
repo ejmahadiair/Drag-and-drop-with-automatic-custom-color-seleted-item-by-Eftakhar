@@ -81,14 +81,8 @@ function App() {
   //   setCustomColor(customColor);
   // },[dragItem])
   return (
-    <div
-      className="App-container"
-      style={{ display: "flex", gap: "10px", border: "1px solid blue" }}
-    >
-      <div
-        className="left"
-        style={{ width: "25%", height: "100vh" }}
-      >
+    <div className="App-container" style={{ display: "flex", gap: "10px" }}>
+      <div className="left" style={{ width: "25%", height: "100vh" }}>
         {isinsert && (
           <p
             style={{ color: "green", textAlign: "center" }}
@@ -97,8 +91,10 @@ function App() {
 
         <ul style={{ listStyle: "none", margin: "5px", padding: "0" }}>
           {item.map((itm, idx) => {
-           let customColor =parseInt(Math.floor(Math.random() * (90000 - 10000 + 1) ) + 900000);
-           console.log("color: ",customColor)
+            let customColor = parseInt(
+              Math.floor(Math.random() * (90000 - 10000 + 1)) + 900000
+            );
+            console.log("color: ", customColor);
             return (
               <li
                 key={idx}
@@ -110,14 +106,18 @@ function App() {
                   minWidth: "90%",
                   textAlign: "center",
                   cursor: "grab",
-                  backgroundColor:`#${customColor}`,
-                  color:"#ffffff"
+                  backgroundColor: `#${customColor}`,
+                  color: "#ffffff",
                 }}
                 draggable
                 onDragStart={(e) =>
                   dragStart(
                     e,
-                    JSON.stringify({ name: itm?.name, key: itm?.key, bgc:`#${customColor}` }),
+                    JSON.stringify({
+                      name: itm?.name,
+                      key: itm?.key,
+                      bgc: `#${customColor}`,
+                    }),
                     1
                   )
                 }
@@ -128,23 +128,23 @@ function App() {
           })}
         </ul>
       </div>
-      <div
-        className="right"
-        style={{ width: "75%", height: "100vh"}}
-      >
+      <div className="right" style={{ width: "75%", height: "100vh" }}>
         <div
           droppable
           onDragOver={(e) => dragOver(e, 1)}
           onDrop={(e) => dragDrop(e, 1)}
           style={{
+            margin: "10px auto",
+            boxSizing: "border-box",
             height: "75%",
             width: "100%",
-            border: "1px solid red",
+            border: "1px solid gray",
             borderRadius: "7px",
             overflow: "auto",
             display: "flex",
             gap: "5px",
             flexWrap: "wrap",
+            position: "relative",
           }}
         >
           {drgData.map((itm, idx) => {
@@ -168,8 +168,8 @@ function App() {
                   textAlign: "center",
                   cursor: "grab",
                   height: "40px",
-                  backgroundColor:`${itm?.bgc}`,
-                  color:"#ffffff"
+                  backgroundColor: `${itm?.bgc}`,
+                  color: "#ffffff",
                 }}
               >
                 {console.log(itm)}
@@ -177,6 +177,17 @@ function App() {
               </div>
             );
           })}
+          <h1
+            className="dnd"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              color: "gray",
+            }}
+          >
+            <pre>Select Item Drag and Drop (try at pc browser)</pre>
+          </h1>
         </div>
 
         <div
@@ -198,7 +209,7 @@ function App() {
             >{`${dragItem} deleted successfully!`}</p>
           )}
 
-          <p className="trash-text">Trash Box</p>
+          <p className="trash-text">Drag to Trash</p>
         </div>
       </div>
     </div>

@@ -8,3 +8,7 @@
 .left{
   /* background-color: #3C4B64; */
 }
+.dnd{
+  transform: translate(-50%,-50%);
+  z-index: -1;
+}
